@@ -11,13 +11,17 @@ public class GUI {
         title.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.PAGE_AXIS));
-        frame.add(title);
+        frame.getContentPane().setLayout(new GroupLayout(frame.getContentPane()));
         frame.setVisible(true);
+        frame.setLayout(null);
         frame.setSize(1000, 1000);
 
+        frame.add(title);
+        title.setBounds(400, 0, 400, 200);
+
         frame.add(book);
-        book.setBounds(0, -50, 50, 50);
+        book.setAlignmentX(Component.CENTER_ALIGNMENT);
+        book.setBounds(500, 500, 100, 100);
         book.setForeground(Color.BLACK);
     }
 }
