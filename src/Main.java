@@ -62,7 +62,7 @@ public class Main {
             } else if (random_status == 1) {
                 status = "Occupied";
             } else {
-                status = "Booked";
+                status = "Reserved";
             }
             String price = "";
             int random_price_upperbound = 3;
