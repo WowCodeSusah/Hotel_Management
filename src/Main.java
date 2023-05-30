@@ -10,6 +10,7 @@ public class Main {
         createRooms_hashmap(Hash_hotel);
         System.out.println(Hash_hotel);
         GUI gui = new GUI();
+        System.out.println("Raihan");
     }
     public static void createRooms_array(ArrayList<Room> yes) {
         for (int i = 0; i < 1000; i++) {
