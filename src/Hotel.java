@@ -8,8 +8,7 @@ public class Hotel {
     public ArrayList<String> keys = new ArrayList<>();
 
     public Hotel() {
-        createRooms_array(this.Array_hotel);
-        createRooms_hashmap(this.Hash_hotel, this.keys);
+        createRooms_hashmap(this.Hash_hotel, this.keys, this.Array_hotel);
     }
     public void createRooms_array(ArrayList<Room> yes) {
         for (int i = 0; i < 1000; i++) {
@@ -50,7 +49,7 @@ public class Hotel {
             yes.add(room);
         }
     }
-    public void createRooms_hashmap(HashMap<String, Room> yes, ArrayList<String> keys) {
+    public void createRooms_hashmap(HashMap<String, Room> yes, ArrayList<String> keys, ArrayList<Room> array_hotel) {
         for (int i = 0; i < 1000; i++) {
             //Room Randomizer
             Random random = new Random();
@@ -102,6 +101,7 @@ public class Hotel {
             }
             key = "H" + roomNumber + "P" + (random_price + 1) + "MP" + random_people;
             keys.add(key);
+            array_hotel.add(room);
             yes.put(key, room);
         }
     }
