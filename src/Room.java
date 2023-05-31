@@ -11,6 +11,12 @@ public class Room {
         this.status = status;
         this.condition = condition;
     }
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
 
     @Override
     public String toString() {
