@@ -5,13 +5,12 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class HotelCalender {
-    public ArrayList<Room> Array_hotel = new ArrayList<>();
     public ArrayList<String> keys = new ArrayList<>();
     public hotelDates hotelCalender = new hotelDates();
     public HashMap<Integer, hotelDates> fullCalender = new HashMap<>();
     public int currentDate;
     public HotelCalender() {
-        createRooms_hashmap(this.hotelCalender.Hash_hotel, this.keys, this.Array_hotel);
+        createRooms_hashmap(this.hotelCalender.Hash_hotel, this.keys, this.hotelCalender.array_hotel);
         SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
         Date day = new Date();
         this.fullCalender.put(getDate(date.format(day)),this.hotelCalender);
@@ -249,6 +248,7 @@ public class HotelCalender {
                     check_room.status = "Free";
                 }
                 fullCalender.get(newDate).Hash_hotel.put(this.keys.get(j), check_room);
+                fullCalender.get(newDate).array_hotel.add(check_room);
             }
         }
     }
