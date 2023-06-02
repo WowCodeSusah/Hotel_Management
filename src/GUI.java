@@ -1,11 +1,15 @@
 import com.toedter.calendar.JCalendar;
-import com.toedter.calendar.JDayChooser;
+import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
 
 public class GUI {
     JFrame frame = new JFrame();
@@ -24,10 +28,9 @@ public class GUI {
     JComboBox<String> Price_range = new JComboBox<>();
     JComboBox<Room> acceptedRoom = new JComboBox<>();
     ArrayList<Room> sortedRooms = new ArrayList<>();
-    JCalendar date = new JCalendar();
+    JDateChooser date = new JDateChooser();
     JLabel background1 = new JLabel(new ImageIcon("hotel.jpg"));
-     GUI(Hotel hotel) throws IOException {
-
+     GUI(HotelCalender hotel) throws IOException {
          background1.setBounds(0, 0, 1200, 700);
         frame.add(background1);
 
@@ -44,7 +47,13 @@ public class GUI {
         frame.add(title);
         title.setBounds(500, 0, 400, 200);
 
-        allRoom.setModel(new DefaultComboBoxModel<Room>(hotel.Array_hotel.toArray(new Room[0])));
+        ArrayList<Room> comboCurrentRooms = new ArrayList<>();
+        int selectedDate;
+        selectedDate = hotel.currentDate;
+        for (int i = 0; i < hotel.keys.size(); i++) {
+            comboCurrentRooms.add(hotel.fullCalender.get(selectedDate).Hash_hotel.get(hotel.keys.get(i)));
+        }
+        allRoom.setModel(new DefaultComboBoxModel<Room>(comboCurrentRooms.toArray(new Room[0])));
         allRoom.setBounds(20, 200, 540, 50);
         frame.add(allRoom);
 
@@ -90,7 +99,7 @@ public class GUI {
                  if (e.getButton() == MouseEvent.BUTTON1) {
                     String price = Price_range.getItemAt(Price_range.getSelectedIndex());
                     int people = Amount_of_people.getItemAt(Amount_of_people.getSelectedIndex());
-                    sortedRooms = hotel.searchRoom(hotel.Hash_hotel, people, price ,hotel.keys);
+                    sortedRooms = hotel.searchRoom(hotel.fullCalender.get(selectedDate).Hash_hotel, people, price ,hotel.keys);
                     acceptedRoom.setModel(new DefaultComboBoxModel<Room>(sortedRooms.toArray(new Room[0])));
                  }
              }
@@ -118,7 +127,24 @@ public class GUI {
         date_title.setFont(new Font("Serif", Font.BOLD, 30));
         frame.add(date_title);
 
-        date.setBounds(700, 200, 200, 200);
+        date.setBounds(700, 200, 200, 50);
+        Date bruh = new Date();
+        date.setDate(bruh);
+        date.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent e) {
+                Date selectedDate;
+                selectedDate = date.getDate();
+                String actualDate = "" + selectedDate.toString();
+                System.out.println(actualDate);
+                String actualActualDate;
+                String Day = (actualDate.charAt(8) - 48) * 10 + (actualDate.charAt(9) - 48) + "";
+                String Month = actualDate.charAt(5) + actualDate.charAt(6) + actualDate.charAt(7) + "";
+                String Year = (actualDate.charAt(24) - 48) * 1000 + (actualDate.charAt(25) - 48) * 100 + (actualDate.charAt(26) - 48) * 10 + (actualDate.charAt(27) - 48) + "";
+                System.out.println(Day + "/" + Month + "/" + Year);
+            }
+        });
         frame.add(date);
     }
+
 }
