@@ -230,25 +230,30 @@ public class HotelCalender {
     }
     public void createNewDate(int date) {
         for (int i = 0; i + this.currentDate < date; i ++) {
-            hotelDates hotelDates = new hotelDates();
             int newDate = this.currentDate + 1 + i;
-            this.fullCalender.put(newDate, hotelDates);
-            for (int j = 0; j < 1000; j++) {
-                int room_number = this.fullCalender.get(this.currentDate + i).Hash_hotel.get(this.keys.get(j)).room_number;
-                String status = this.fullCalender.get(this.currentDate + i).Hash_hotel.get(this.keys.get(j)).status;
-                String price = this.fullCalender.get(this.currentDate + i).Hash_hotel.get(this.keys.get(j)).price;
-                String condition = this.fullCalender.get(this.currentDate + i).Hash_hotel.get(this.keys.get(j)).condition;
-                int max_people = this.fullCalender.get(this.currentDate + i).Hash_hotel.get(this.keys.get(j)).max_people;
-                Room check_room = new Room(room_number, status, price, max_people, condition);
-                if (check_room.status.equals("Occupied")) {
-                    check_room.status = "Free";
-                } else if (check_room.status.equals("Reserved")) {
-                    check_room.status = "Occupied";
-                } else {
-                    check_room.status = "Free";
+            if (fullCalender.containsKey(newDate)) {
+                System.out.println("Date " + newDate + " Exist Creating Date After");
+            } else {
+                hotelDates hotelDates = new hotelDates();
+                newDate = this.currentDate + 1 + i;
+                this.fullCalender.put(newDate, hotelDates);
+                for (int j = 0; j < 1000; j++) {
+                    int room_number = this.fullCalender.get(this.currentDate + i).Hash_hotel.get(this.keys.get(j)).room_number;
+                    String status = this.fullCalender.get(this.currentDate + i).Hash_hotel.get(this.keys.get(j)).status;
+                    String price = this.fullCalender.get(this.currentDate + i).Hash_hotel.get(this.keys.get(j)).price;
+                    String condition = this.fullCalender.get(this.currentDate + i).Hash_hotel.get(this.keys.get(j)).condition;
+                    int max_people = this.fullCalender.get(this.currentDate + i).Hash_hotel.get(this.keys.get(j)).max_people;
+                    Room check_room = new Room(room_number, status, price, max_people, condition);
+                    if (check_room.status.equals("Occupied")) {
+                        check_room.status = "Free";
+                    } else if (check_room.status.equals("Reserved")) {
+                        check_room.status = "Occupied";
+                    } else {
+                        check_room.status = "Free";
+                    }
+                    fullCalender.get(newDate).Hash_hotel.put(this.keys.get(j), check_room);
+                    fullCalender.get(newDate).array_hotel.add(check_room);
                 }
-                fullCalender.get(newDate).Hash_hotel.put(this.keys.get(j), check_room);
-                fullCalender.get(newDate).array_hotel.add(check_room);
             }
         }
     }

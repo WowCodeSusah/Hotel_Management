@@ -14,10 +14,6 @@ public class Room {
     public void setStatus(String status) {
         this.status = status;
     }
-    public void setCondition(String condition) {
-        this.condition = condition;
-    }
-
     @Override
     public String toString() {
         return "[Room " + room_number + "." + " Status = " + status + ", Condition = "+ condition + ", Price = " + price  + ", Max_Capacity = " + max_people + "]\n";

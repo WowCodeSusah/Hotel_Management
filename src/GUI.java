@@ -182,9 +182,24 @@ public class GUI {
              @Override
              public void mouseClicked(MouseEvent e) {
                  if (e.getButton() == MouseEvent.BUTTON1) {
+                     String selectedIndex = hotel.keys.get(allRoom.getSelectedIndex());
+                     int roomNumber = allRoom.getItemAt(allRoom.getSelectedIndex()).room_number;
                      String change = statusChoice.getItemAt(statusChoice.getSelectedIndex());
                      Room targetRoom = allRoom.getItemAt(allRoom.getSelectedIndex());
                      targetRoom.status = change;
+                     hotel.fullCalender.get(selectedDate).Hash_hotel.get(selectedIndex).status = change;
+                     if (hotel.fullCalender.containsKey(selectedDate + 1)) {
+                         if (change.equals("Free")) {
+                             hotel.fullCalender.get(selectedDate + 1).Hash_hotel.get(selectedIndex).status = "Free";
+                             hotel.fullCalender.get(selectedDate + 1).array_hotel.get(roomNumber - 1).status = "Free";
+                         } else if (change.equals("Occupied")) {
+                             hotel.fullCalender.get(selectedDate + 1).Hash_hotel.get(selectedIndex).status = "Free";
+                             hotel.fullCalender.get(selectedDate + 1).array_hotel.get(roomNumber - 1).status = "Free";
+                         } else {
+                             hotel.fullCalender.get(selectedDate + 1).Hash_hotel.get(selectedIndex).status = "Occupied";
+                             hotel.fullCalender.get(selectedDate + 1).array_hotel.get(roomNumber - 1).status = "Occupied";
+                         }
+                     }
                  }
              }
          });
