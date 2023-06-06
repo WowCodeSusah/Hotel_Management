@@ -58,7 +58,7 @@ public class HotelCalender {
     }
      */
     public void createRooms_hashmap(HashMap<String, Room> yes, ArrayList<String> keys, ArrayList<Room> array_hotel) {
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 10000; i++) {
             //Room Randomizer
             Random random = new Random();
             String status = "";
@@ -99,10 +99,12 @@ public class HotelCalender {
             String key = "";
             String roomNumber = "";
             if ((i + 1) <= 9) {
+                roomNumber = "0000" + (i + 1);
+            } else if ((i + 1) <= 99) {
                 roomNumber = "000" + (i + 1);
-            } else if ((i + 1) <= 99 ) {
+            } else if ((i + 1) <= 999 ) {
                 roomNumber = "00" + (i + 1);
-            } else if ((i + 1) <= 999) {
+            } else if ((i + 1) <= 9999) {
                 roomNumber = "0" + (i + 1);
             } else {
                 roomNumber = "" + (i + 1);
@@ -120,10 +122,10 @@ public class HotelCalender {
             String currentKeys = "";
             int currentMaxPeople = 0;
             currentKeys = key;
-            currentMaxPeople = currentKeys.charAt(9) - 48;
+            currentMaxPeople = currentKeys.charAt(10) - 48;
             int currentPrice = 0;
             String actualPrice = "";
-            currentPrice = currentKeys.charAt(6) - 48;
+            currentPrice = currentKeys.charAt(7) - 48;
             if (currentPrice == 1) {
                 actualPrice = "High";
             } else if (currentPrice == 2) {
@@ -237,7 +239,7 @@ public class HotelCalender {
                 hotelDates hotelDates = new hotelDates();
                 newDate = this.currentDate + 1 + i;
                 this.fullCalender.put(newDate, hotelDates);
-                for (int j = 0; j < 1000; j++) {
+                for (int j = 0; j < 10000; j++) {
                     int room_number = this.fullCalender.get(this.currentDate + i).Hash_hotel.get(this.keys.get(j)).room_number;
                     String status = this.fullCalender.get(this.currentDate + i).Hash_hotel.get(this.keys.get(j)).status;
                     String price = this.fullCalender.get(this.currentDate + i).Hash_hotel.get(this.keys.get(j)).price;
